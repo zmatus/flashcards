@@ -1,0 +1,88 @@
+/*
+===============
+General styling
+===============
+*/
+h1 {
+  text-align: center;
+}
+hr {
+  width: 80%;
+}
+
+/*
+==========
+Search bar
+==========
+*/
+.search-bar {
+  text-align: center;
+  width: 100%;
+  margin-top: 2em;
+}
+.search-bar label {
+  font-size: 20px;
+  margin-right: 1em;
+}
+.search-bar input[type="search"] {
+  width: 30%;
+  margin-bottom: 2em;
+}
+
+/*
+===============
+Decks container
+===============
+*/
+.decks-container {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.decks-container a {
+  text-decoration: none;
+  color: gray;
+  font-size: 18px;
+  margin-right: 1em;
+}
+.decks-container a:hover {
+  color: black;
+}
+.deck {
+  width: 200px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  border: 1px solid gray;
+  padding: 1em;
+  word-wrap: wrap;
+  text-align: center;
+}
+.deck:hover {
+  box-shadow: 3px 3px 3px black;
+  border: 1px solid black;
+}
+.hide-deck {
+  display: none;
+}
+
+/*
+============
+Deck control
+============
+*/
+.deck-control {
+  display: grid;
+  width: 20%;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 1em auto;
+  grid-gap: 1em;
+}
+.deck-control button {
+  min-width: 150px;
+  font-size: 20px;
+}
+

@@ -1,0 +1,16 @@
+---
+layout: default
+title: Your Decks
+---
+<div class="search-bar">
+  <label for="search-decks">Search decks:</label>
+  <input id="search-decks" type="search">
+</div>
+
+<main class="decks-container">
+  {% for deck in site.decks %}
+    <a href="{{ deck.url }}">
+      <article class="deck">{{ deck.title }}</article>
+    </a>
+  {% endfor %}
+</main>
