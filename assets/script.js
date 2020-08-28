@@ -2,11 +2,11 @@
  * Filter out deck links from search query.
  * 
  * @param {HTMLElement} deckLinks
- * @param {HTMLElement} searchBar
+ * @param {HTMLElement} searchbar
  */
-function filterDecks(deckLinks, searchBar) {
+function filterDecks(deckLinks, searchbar) {
 
-  searchBar.addEventListener('keyup', function(e) {
+  searchbar.addEventListener('keyup', function(e) {
     let query = e.target.value;
 
     deckLinks.forEach(deck => {
@@ -21,10 +21,33 @@ function filterDecks(deckLinks, searchBar) {
   });
 }
 
-if (window.location.pathname == '/') {
-  const decks = Array.from(document.querySelectorAll('.deck'));
-  const search = document.querySelector('#search-decks');
-  filterDecks(decks, search);
+/**
+ * Filter out flashcards from search query.
+ * 
+ * @param {HTMLElement} flashcards
+ * @param {HTMLElement} searchbar 
+ */
+function filterCards(flashcards, searchbar) {
+
+  console.log(flashcards);
+  
+  searchbar.addEventListener('keyup', function(e) {
+    let query = e.target.value;
+
+    flashcards.forEach(card => {
+      card.parentNode.classList.add('hide');
+    });
+
+    flashcards.filter(card => {
+
+      let front = card.firstChild.textContent.toLowerCase();
+      let back = card.lastChild.textContent.toLowerCase();
+
+      if (front.includes(query) || back.includes(query)) {
+        card.parentNode.classList.remove('hide');
+      }
+    });
+  });
 }
 
 /**
@@ -72,6 +95,12 @@ function flipCard(cards) {
   });
 }
 
+if (window.location.pathname == '/') {
+  const decks = Array.from(document.querySelectorAll('.deck'));
+  const search = document.querySelector('#search-decks');
+  filterDecks(decks, search);
+}
+
 if (window.location.pathname != '/') {
   let container = document.querySelector('.cards-container');
   let cardText = container.children;
@@ -85,16 +114,20 @@ if (window.location.pathname != '/') {
     
     let front = cardsArr[0].split('.');
     let back = cardsArr[1].split('.');
+
     let cardObj = {
       front: front[1].trim(),
       back: back[1].trim()
     };
     allCards.push(cardObj);
   }
-  console.log(allCards);
-
   makeCards(container, allCards);
 
   let cards = document.querySelectorAll('.card');
   flipCard(cards);
+
+  cards = Array.from(cards);
+  let search = document.querySelector('#search-cards');
+
+  filterCards(cards, search);
 }

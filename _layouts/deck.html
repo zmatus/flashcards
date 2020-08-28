@@ -1,0 +1,21 @@
+---
+layout: default
+title: {{ page.title }}
+---
+<nav class="deck-control">
+  <a href="/">
+    <button type="button">&larr; Back</button>
+  </a>
+  <button type="button">Test &rarr;</button>
+</nav>
+
+<div class="search-bar">
+  <label for="search-cards">Search cards:</label>
+  <input id="search-cards" type="search">
+</div>
+
+<main class="cards-container">
+
+  {{ content }}
+
+</main>
