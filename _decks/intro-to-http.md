@@ -1,7 +1,6 @@
 ---
 layout: deck
 title: Intro to HTTP
-date: 2020-08-19
 ---
 
 1a. Stateless

@@ -5,14 +5,15 @@
  * @param {HTMLElement} searchbar
  */
 function filterDecks(deckLinks, searchbar) {
-
-  searchbar.addEventListener('keyup', function(e) {
+  searchbar.addEventListener('keyup', function (e) {
     let query = e.target.value;
 
+    // Hide all decks on key press
     deckLinks.forEach(deck => {
       deck.classList.add('hide');
     });
-  
+
+    // Remove hidden decks matching search query
     deckLinks.filter(deck => {
       if (deck.textContent.toLowerCase().includes(query)) {
         deck.classList.remove('hide');
@@ -28,10 +29,7 @@ function filterDecks(deckLinks, searchbar) {
  * @param {HTMLElement} searchbar 
  */
 function filterCards(flashcards, searchbar) {
-
-  console.log(flashcards);
-  
-  searchbar.addEventListener('keyup', function(e) {
+  searchbar.addEventListener('keyup', function (e) {
     let query = e.target.value;
 
     flashcards.forEach(card => {
@@ -39,7 +37,6 @@ function filterCards(flashcards, searchbar) {
     });
 
     flashcards.filter(card => {
-
       let front = card.firstChild.textContent.toLowerCase();
       let back = card.lastChild.textContent.toLowerCase();
 
@@ -53,30 +50,37 @@ function filterCards(flashcards, searchbar) {
 /**
  * Create flashcard for each object inside array.
  * 
+ * Card HTML structure:
+ * 
+ * <div class="card-box">
+ *   <div class="card">
+ *     <div class="card-front"></div>
+ *     <div class="card-back"></div>
+ *   </div>
+ * </div>
+ * 
  * @param {HTMLElement} cardContainer 
  * @param {Array.<Object>} termsArr 
  */
 function makeCards(cardContainer, termsArr) {
-
   for (let i = 0; i < termsArr.length; i++) {
-
     let front = document.createElement('div');
     front.classList.add('card-front');
     front.textContent = termsArr[i].front;
-  
+
     let back = document.createElement('div');
     back.classList.add('card-back');
     back.textContent = termsArr[i].back;
-  
+
     let card = document.createElement('div');
     card.classList.add('card');
     card.appendChild(front);
     card.appendChild(back);
-  
+
     let cardBox = document.createElement('div');
     cardBox.classList.add('card-box');
     cardBox.appendChild(card);
-  
+
     cardContainer.appendChild(cardBox);
   }
 }
@@ -87,47 +91,82 @@ function makeCards(cardContainer, termsArr) {
  * @param {HTMLElement} cards 
  */
 function flipCard(cards) {
-
   cards.forEach(card => {
-    card.addEventListener('click', function() {
+    card.addEventListener('click', function () {
       card.classList.toggle('flipped');
     });
   });
+}
+
+/**
+ * Create a term object from <p> containing only text.
+ * 
+ * @param {HTMLElement} terms 
+ */
+function processTextTerms(terms) {
+  let termsArr = terms.textContent.split('\n');
+  let front = termsArr[0].split('.');
+  let back = termsArr[1].split('.');
+  let termsObj = {
+    front: front[1].trim(),
+    back: back[1].trim()
+  };
+  return termsObj;
+}
+
+/**
+ * Create term object from <div> containing code and
+ * <p> containing text.
+ * 
+ * @param {HTMLElement} terms 
+ */
+function processCodeTerms(terms) {
+  if (terms.tagName == 'DIV') {
+    console.log(terms);
+    console.log(terms.textContent);
+  }
+}
+
+/**
+ * Process and place terms into cards.
+ * 
+ * @param {Array} termsArr 
+ */
+function processTerms(termsArr) {
+  for (let i = 0; i < termsArr.length; i++) {
+    let card = termsArr[i];
+    processCodeTerms(card);
+  }
 }
 
 if (window.location.pathname == '/') {
   const decks = Array.from(document.querySelectorAll('.deck'));
   const search = document.querySelector('#search-decks');
   filterDecks(decks, search);
-}
-
-if (window.location.pathname != '/') {
+} else {
   let container = document.querySelector('.cards-container');
-  let cardText = container.children;
-  
+  let terms = Array.from(container.children);
+
+  console.log(terms);
+
   let allCards = [];
-  for (let i = 0; i < cardText.length; i++) {
-    let card = cardText[i];
-    let cardsArr = card.textContent.split('\n');
+  processTerms(terms);
+  // for (let i = 0; i < cardText.length; i++) {
+  //   let card = cardText[i];
+  //   // card.classList.add('hide');
 
-    card.classList.add('hide');
-    
-    let front = cardsArr[0].split('.');
-    let back = cardsArr[1].split('.');
+  //   processCodeTerms(card);
 
-    let cardObj = {
-      front: front[1].trim(),
-      back: back[1].trim()
-    };
-    allCards.push(cardObj);
-  }
-  makeCards(container, allCards);
+  //   let cardObj = processTextTerms(card);
+  //   allCards.push(cardObj);
+  // }
+  // makeCards(container, allCards);
 
-  let cards = document.querySelectorAll('.card');
-  flipCard(cards);
+  // let cards = document.querySelectorAll('.card');
+  // flipCard(cards);
 
-  cards = Array.from(cards);
-  let search = document.querySelector('#search-cards');
+  // cards = Array.from(cards);
+  // let search = document.querySelector('#search-cards');
 
-  filterCards(cards, search);
+  // filterCards(cards, search);
 }

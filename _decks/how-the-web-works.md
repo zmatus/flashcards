@@ -1,7 +1,6 @@
 ---
 layout: deck
 title: How the Web Works
-date: 2020-08-19
 ---
 
 1a. The internet
