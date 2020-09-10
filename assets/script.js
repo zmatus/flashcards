@@ -64,13 +64,28 @@ function filterCards(flashcards, searchbar) {
  */
 function makeCards(cardContainer, termsArr) {
   for (let i = 0; i < termsArr.length; i++) {
-    let front = document.createElement('div');
-    front.classList.add('card-front');
-    front.textContent = termsArr[i].front;
+    let frontTerm = termsArr[i].front;
+    let backTerm = termsArr[i].back;
+    let front;
+    let back;
 
-    let back = document.createElement('div');
-    back.classList.add('card-back');
-    back.textContent = termsArr[i].back;
+    if (frontTerm.tagName == 'DIV') {
+      front = frontTerm;
+      front.classList.add('code-front');
+    } else {
+      front = document.createElement('div');
+      front.textContent = frontTerm;
+      front.classList.add('card-front');
+    }
+
+    if (backTerm.tagName == 'DIV') {
+      back = backTerm;
+      back.classList.add('code-back');
+    } else {
+      back = document.createElement('div');
+      back.textContent = termsArr[i].back;
+      back.classList.add('card-back');
+    }
 
     let card = document.createElement('div');
     card.classList.add('card');
@@ -99,44 +114,83 @@ function flipCard(cards) {
 }
 
 /**
- * Create a term object from <p> containing only text.
+ * Return term object from <p> containing only text.
  * 
  * @param {HTMLElement} terms 
  */
 function processTextTerms(terms) {
   let termsArr = terms.textContent.split('\n');
-  let front = termsArr[0].split('.');
-  let back = termsArr[1].split('.');
-  let termsObj = {
-    front: front[1].trim(),
-    back: back[1].trim()
+  if (termsArr.length < 2) return;
+
+  let frontTerm = termsArr[0].split('.');
+  let backTerm = termsArr[1].split('.');
+  if (!frontTerm[1] || !backTerm[1]) return;
+
+  return {
+    front: frontTerm[1].trim(),
+    back: backTerm[1].trim()
   };
-  return termsObj;
 }
 
 /**
- * Create term object from <div> containing code and
- * <p> containing text.
+ * Return array containing term object from <div> and a flag
+ * to signify if next term should be skipped.
  * 
  * @param {HTMLElement} terms 
  */
-function processCodeTerms(terms) {
-  if (terms.tagName == 'DIV') {
-    console.log(terms);
-    console.log(terms.textContent);
+function processCodeTerms(prevTerm, term, nextTerm) {
+
+  function processText(text) {
+    let term = text.textContent.split('\n');
+    term = term[0].substr(term[0].indexOf('.') + 1);
+    return term.trim();
   }
+
+  let frontTerm;
+  let backTerm;
+  let flag;
+
+  // If length of previous term less than 4, <div> is front card
+  if (prevTerm.textContent.length < 4) {
+    frontTerm = term;
+    backTerm = processText(nextTerm);
+    flag = true;
+  } else {  // Otherwise <div> is back card
+    frontTerm = processText(prevTerm);
+    backTerm = term;
+    flag = false;
+  }
+  return [{
+    front: frontTerm,
+    back: backTerm
+  }, flag];
 }
 
 /**
  * Process and place terms into cards.
  * 
- * @param {Array} termsArr 
+ * @param {array} termsArr
+ * @return {array} allCards
  */
 function processTerms(termsArr) {
-  for (let i = 0; i < termsArr.length; i++) {
-    let card = termsArr[i];
-    processCodeTerms(card);
+  let allCards = [];
+  let i = 0;
+  while (i < termsArr.length) {
+    let prev = termsArr[i - 1];
+    let current = termsArr[i];
+    let next = termsArr[i + 1];
+
+    if (current.tagName == 'DIV') {
+      let [card, flag] = processCodeTerms(prev, current, next);
+      allCards.push(card);
+      flag ? i += 2 : i++;
+    } else {
+      let card = processTextTerms(current);
+      if (card) allCards.push(card);
+      i++;
+    }
   }
+  return allCards;
 }
 
 if (window.location.pathname == '/') {
@@ -147,10 +201,15 @@ if (window.location.pathname == '/') {
   let container = document.querySelector('.cards-container');
   let terms = Array.from(container.children);
 
-  console.log(terms);
+  let allCards = processTerms(terms);
+  makeCards(container, allCards);
+  
+  let cards = document.querySelectorAll('.card');
+  flipCard(cards);
 
-  let allCards = [];
-  processTerms(terms);
+  cards = Array.from(cards);
+  let search = document.querySelector('#search-cards');
+  filterCards(cards, search);
   // for (let i = 0; i < cardText.length; i++) {
   //   let card = cardText[i];
   //   // card.classList.add('hide');
@@ -162,11 +221,5 @@ if (window.location.pathname == '/') {
   // }
   // makeCards(container, allCards);
 
-  // let cards = document.querySelectorAll('.card');
-  // flipCard(cards);
 
-  // cards = Array.from(cards);
-  // let search = document.querySelector('#search-cards');
-
-  // filterCards(cards, search);
 }

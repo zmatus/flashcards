@@ -34,3 +34,18 @@ for (let i = 0; i < 9; i++) {
 }
 ```
 3b. The `for statement` creates a loop that consists of three optional expressions, enclosed in parentheses and separated by semicolons, followed by a statement to be executed in the loop.
+
+4a. Statements
+4b. Syntax constructs and commands that perform actions.
+
+5a. The `do...while statement` creates a loop that executes a specified statement until the test condition evaluates to false. The condition is evaluated after executing the statement, resulting in the specified statement executing at least once.
+5b.
+```js
+let result = '';
+let i = 0;
+
+do {
+  i = i + 1;
+  result = result + i;
+} while (i < 5);
+```
