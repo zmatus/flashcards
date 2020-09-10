@@ -200,26 +200,20 @@ if (window.location.pathname == '/') {
 } else {
   let container = document.querySelector('.cards-container');
   let terms = Array.from(container.children);
-
   let allCards = processTerms(terms);
   makeCards(container, allCards);
+
+  // Hide all <p> in <main>
+  terms.forEach((element) => {
+    if (element.tagName == 'P') element.classList.add('hide');
+  });
   
+  // Make cards flippable
   let cards = document.querySelectorAll('.card');
   flipCard(cards);
 
+  // Make cards searchable
   cards = Array.from(cards);
   let search = document.querySelector('#search-cards');
   filterCards(cards, search);
-  // for (let i = 0; i < cardText.length; i++) {
-  //   let card = cardText[i];
-  //   // card.classList.add('hide');
-
-  //   processCodeTerms(card);
-
-  //   let cardObj = processTextTerms(card);
-  //   allCards.push(cardObj);
-  // }
-  // makeCards(container, allCards);
-
-
 }

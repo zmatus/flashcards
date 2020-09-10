@@ -151,6 +151,7 @@ Cards container
   padding: 5px;
 }
 .code-back {
+  object-fit: contain;
   background: #d6e0f0;
   border: 1px solid gray;
   padding: 5px;

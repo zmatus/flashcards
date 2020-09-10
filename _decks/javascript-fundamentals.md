@@ -49,3 +49,28 @@ do {
   result = result + i;
 } while (i < 5);
 ```
+
+6a. Mergesort algorithm
+6b.
+```js
+function mergeSort(left, right) {
+  let i = 0;
+  let j = 0;
+  let results = [];
+
+  while (i < left.length || j < right.length) {
+    if (i === left.length) {
+      results.push(right[j]);
+      j++;
+    }
+    else if (j === rght.length || left[i] <= right[i]) {
+      results.push(left[i]);
+      i++;
+    } else {
+      results.push(right[j]);
+      j++;
+    }
+  }
+  return results;
+}
+```
