@@ -154,15 +154,13 @@ Cards container
   object-fit: contain;
   background: #d6e0f0;
   border: 1px solid gray;
-  padding: 5px;
   transform: rotateY(180deg);
+  padding: 5px;
 }
 .flipped {
   transform: rotateY(180deg);
 }
 .highlight {
   font-size: 13px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
 }
