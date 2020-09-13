@@ -4,7 +4,7 @@
  * @param {HTMLElement} deckLinks
  * @param {HTMLElement} searchbar
  */
-function filterDecks(deckLinks, searchbar) {
+const filterDecks = (deckLinks, searchbar) => {
   searchbar.addEventListener('keyup', function (e) {
     let query = e.target.value;
 
@@ -28,7 +28,7 @@ function filterDecks(deckLinks, searchbar) {
  * @param {HTMLElement} flashcards
  * @param {HTMLElement} searchbar 
  */
-function filterCards(flashcards, searchbar) {
+const filterCards = (flashcards, searchbar) => {
   searchbar.addEventListener('keyup', function (e) {
     let query = e.target.value;
 
@@ -62,7 +62,7 @@ function filterCards(flashcards, searchbar) {
  * @param {HTMLElement} cardContainer 
  * @param {Array.<Object>} termsArr 
  */
-function makeCards(cardContainer, termsArr) {
+const makeCards = (cardContainer, termsArr) => {
   for (let i = 0; i < termsArr.length; i++) {
     let frontTerm = termsArr[i].front;
     let backTerm = termsArr[i].back;
@@ -105,7 +105,7 @@ function makeCards(cardContainer, termsArr) {
  * 
  * @param {HTMLElement} cards 
  */
-function flipCard(cards) {
+const flipCard = (cards) => {
   cards.forEach(card => {
     card.addEventListener('click', function () {
       card.classList.toggle('flipped');
@@ -118,7 +118,7 @@ function flipCard(cards) {
  * 
  * @param {HTMLElement} terms 
  */
-function processTextTerms(terms) {
+const processTextTerms = (terms) => {
   let termsArr = terms.textContent.split('\n');
   if (termsArr.length < 2) return;
 
@@ -138,9 +138,9 @@ function processTextTerms(terms) {
  * 
  * @param {HTMLElement} terms 
  */
-function processCodeTerms(prevTerm, term, nextTerm) {
+const processCodeTerms = (prevTerm, term, nextTerm) => {
 
-  function processText(text) {
+  const processText = (text) => {
     let term = text.textContent.split('\n');
     term = term[0].substr(term[0].indexOf('.') + 1);
     return term.trim();
@@ -172,7 +172,7 @@ function processCodeTerms(prevTerm, term, nextTerm) {
  * @param {array} termsArr
  * @return {array} allCards
  */
-function processTerms(termsArr) {
+const processTerms = (termsArr) => {
   let allCards = [];
   let i = 0;
   while (i < termsArr.length) {
