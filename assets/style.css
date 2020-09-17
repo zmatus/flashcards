@@ -3,7 +3,12 @@
 General styling
 ===============
 */
-
+body {
+  background: #f7fbfc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
 h1 {
   text-align: center;
 }
@@ -14,13 +19,11 @@ hr {
   display: none !important;
 }
 
-
 /*
 ==========
 Search bar
 ==========
 */
-
 .search-bar {
   text-align: center;
   width: 100%;
@@ -40,7 +43,6 @@ Search bar
 Decks container
 ===============
 */
-
 .decks-container {
   display: flex;
   width: 80%;
@@ -50,25 +52,27 @@ Decks container
   flex-wrap: wrap;
 }
 .decks-container a {
+  position: relative;
   text-decoration: none;
-  color: gray;
+  color: black;
   font-size: 18px;
   margin-right: 1em;
 }
 .decks-container a:hover {
-  color: black;
+  bottom: 10px;
 }
 .deck {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 200px;
-  border: 1px solid gray;
+  width: 325px;
+  height: 250px;
+  border: 1px solid black;
   padding: 1em;
+  background: #d6e6f2;
 }
 .deck:hover {
-  box-shadow: 3px 3px 3px black;
+  box-shadow: 2px 2px 2px black;
   border: 1px solid black;
 }
 
@@ -77,20 +81,24 @@ Decks container
 Deck control
 ============
 */
-
 .deck-control {
   display: grid;
   width: 20%;
   grid-template-columns: repeat(2, 1fr);
-  margin: 1em auto;
-  grid-gap: 1em;
+  margin: 0 auto;
+  grid-gap: 2em;
+  padding-top: 1em;
 }
 .deck-control button {
   color: white;
-  min-width: 150px;
-  min-height: 30px;
+  width: 150px;
+  height: 35px;
   font-size: 22px;
-  background: #4e89ae;
+  font-weight: 500;
+  background: #769fcd;
+}
+.deck-control button:hover {
+  transform: scale(1.05);
 }
 
 /*
@@ -98,13 +106,14 @@ Deck control
 Cards container
 ===============
 */
-
 .cards-container {
   display: flex;
   margin: 0 auto;
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
+  font-size: 16px;
+  padding-bottom: 2em;
 }
 .card-box {
   width: 350px;
@@ -120,6 +129,9 @@ Cards container
   transition: transform 0.6s;
   transform-style: preserve-3d;
 }
+.card:hover {
+  bottom: 10px;
+}
 .card div {
   position: absolute;
   width: 100%;
@@ -130,30 +142,29 @@ Cards container
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid gray;
-  background: #f1f3f8;
+  border: 2px solid #8d93ab;
+  background: #d6e6f2;
   text-align: center;
   padding: 5px;
 }
 .code-front {
-  background: #f1f3f8;
-  border: 1px solid gray;
+  background: #d6e6f2;
+  border: 2px solid #8d93ab;
   padding: 5px;
 }
 .card-back {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid gray;
+  border: 2px solid #8d93ab;
   transform: rotateY(180deg);
-  background: #d6e0f0;
+  background: #b9d7ea;
   text-align: center;
   padding: 5px;
 }
 .code-back {
-  object-fit: contain;
-  background: #d6e0f0;
-  border: 1px solid gray;
+  background: #b9d7ea;
+  border: 2px solid #8d93ab;
   transform: rotateY(180deg);
   padding: 5px;
 }

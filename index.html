@@ -8,13 +8,9 @@ title: Your Decks
 </div>
 
 <main class="decks-container">
-
   {% for deck in site.decks %}
-
     <a class="deck-link" href="{{ deck.url }}">
       <article class="deck">{{ deck.title }}</article>
     </a>
-    
   {% endfor %}
-
-</main>
+  </main>

@@ -193,14 +193,19 @@ const processTerms = (termsArr) => {
   return allCards;
 }
 
+let flashcards;
+
 if (window.location.pathname == '/') {
-  const decks = Array.from(document.querySelectorAll('.deck'));
-  const search = document.querySelector('#search-decks');
-  filterDecks(decks, search);
+  let decks = Array.from(document.querySelectorAll('.deck'));
+  let searchDecks = document.querySelector('#search-decks');
+
+  filterDecks(decks, searchDecks);
 } else {
   let container = document.querySelector('.cards-container');
   let terms = Array.from(container.children);
   let allCards = processTerms(terms);
+
+  // Generate flashcards from terms
   makeCards(container, allCards);
 
   // Hide all <p> in <main>
@@ -209,11 +214,13 @@ if (window.location.pathname == '/') {
   });
   
   // Make cards flippable
-  let cards = document.querySelectorAll('.card');
-  flipCard(cards);
+  flashcards = document.querySelectorAll('.card');
+  flipCard(flashcards);
 
   // Make cards searchable
-  cards = Array.from(cards);
-  let search = document.querySelector('#search-cards');
-  filterCards(cards, search);
+  flashcards = Array.from(flashcards);
+  let searchCards = document.querySelector('#search-cards');
+  filterCards(flashcards, searchCards);
 }
+
+console.log(flashcards);
