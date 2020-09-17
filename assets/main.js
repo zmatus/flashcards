@@ -194,7 +194,7 @@ const processTerms = (termsArr) => {
   return allCards;
 }
 
-if (window.location.pathname == '/') {
+if (window.location.pathname == '/jekyll-flashcards/') {
   let decks = Array.from(document.querySelectorAll('.deck'));
   let searchDecks = document.querySelector('#search-decks');
 
