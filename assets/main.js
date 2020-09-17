@@ -118,17 +118,18 @@ const flipCard = (cards) => {
  * 
  * @param {HTMLElement} terms 
  */
-const processTextTerms = (terms) => {
-  let termsArr = terms.textContent.split('\n');
-  if (termsArr.length < 2) return;
+const processTextTerms = (text) => {
+  let terms = text.textContent.split('\n');
+  if (terms.length < 2) return;
 
-  let frontTerm = termsArr[0].split('.');
-  let backTerm = termsArr[1].split('.');
+  let frontTerm = terms[0].substr(terms[0].indexOf('.') + 1);
+  let backTerm = terms[1].substr(terms[1].indexOf('.') + 1);
+
   if (!frontTerm[1] || !backTerm[1]) return;
 
   return {
-    front: frontTerm[1].trim(),
-    back: backTerm[1].trim()
+    front: frontTerm,
+    back: backTerm
   };
 }
 
@@ -193,8 +194,6 @@ const processTerms = (termsArr) => {
   return allCards;
 }
 
-let flashcards;
-
 if (window.location.pathname == '/') {
   let decks = Array.from(document.querySelectorAll('.deck'));
   let searchDecks = document.querySelector('#search-decks');
@@ -214,7 +213,7 @@ if (window.location.pathname == '/') {
   });
   
   // Make cards flippable
-  flashcards = document.querySelectorAll('.card');
+  let flashcards = document.querySelectorAll('.card');
   flipCard(flashcards);
 
   // Make cards searchable
@@ -222,5 +221,3 @@ if (window.location.pathname == '/') {
   let searchCards = document.querySelector('#search-cards');
   filterCards(flashcards, searchCards);
 }
-
-console.log(flashcards);
