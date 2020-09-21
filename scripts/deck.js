@@ -1,28 +1,4 @@
 /**
- * Filter out deck links from search query.
- * 
- * @param {HTMLElement} deckLinks
- * @param {HTMLElement} searchbar
- */
-const filterDecks = (deckLinks, searchbar) => {
-  searchbar.addEventListener('keyup', function (e) {
-    let query = e.target.value;
-
-    // Hide all decks on key press
-    deckLinks.forEach(deck => {
-      deck.classList.add('hide');
-    });
-
-    // Remove hidden decks matching search query
-    deckLinks.filter(deck => {
-      if (deck.textContent.toLowerCase().includes(query)) {
-        deck.classList.remove('hide');
-      }
-    });
-  });
-}
-
-/**
  * Filter out flashcards from search query.
  * 
  * @param {HTMLElement} flashcards
@@ -194,30 +170,23 @@ const processTerms = (termsArr) => {
   return allCards;
 }
 
-if (window.location.pathname == '/jekyll-flashcards/') {
-  let decks = Array.from(document.querySelectorAll('.deck'));
-  let searchDecks = document.querySelector('#search-decks');
+let container = document.querySelector('.cards-container');
+let terms = Array.from(container.children);
+let allCards = processTerms(terms);
 
-  filterDecks(decks, searchDecks);
-} else {
-  let container = document.querySelector('.cards-container');
-  let terms = Array.from(container.children);
-  let allCards = processTerms(terms);
+// Generate flashcards from terms
+makeCards(container, allCards);
 
-  // Generate flashcards from terms
-  makeCards(container, allCards);
+// Hide all <p> in <main>
+terms.forEach((element) => {
+  if (element.tagName == 'P') element.classList.add('hide');
+});
 
-  // Hide all <p> in <main>
-  terms.forEach((element) => {
-    if (element.tagName == 'P') element.classList.add('hide');
-  });
-  
-  // Make cards flippable
-  let flashcards = document.querySelectorAll('.card');
-  flipCard(flashcards);
+// Make cards flippable
+let flashcards = document.querySelectorAll('.card');
+flipCard(flashcards);
 
-  // Make cards searchable
-  flashcards = Array.from(flashcards);
-  let searchCards = document.querySelector('#search-cards');
-  filterCards(flashcards, searchCards);
-}
+// Make cards searchable
+flashcards = Array.from(flashcards);
+let searchCards = document.querySelector('#search-cards');
+filterCards(flashcards, searchCards);
