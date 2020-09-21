@@ -3,8 +3,11 @@ layout: default
 title: {{ page.title }}
 ---
 <nav class="deck-control">
-  <a href="/jekyll-flashcards/">
+  <a href="{{ site.baseurl }}/">
     <button type="button">&larr; Back</button>
+  </a>
+  <a href="{{ page.id }}/test">
+    <button type="button">Simple Test</button>
   </a>
 </nav>
 

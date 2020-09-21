@@ -1,26 +1,82 @@
 /**
- * Filter out flashcards from search query.
+ * Process and place terms into cards.
  * 
- * @param {HTMLElement} flashcards
- * @param {HTMLElement} searchbar 
+ * @param {array} termsArr
+ * @return {array} allCards
  */
-const filterCards = (flashcards, searchbar) => {
-  searchbar.addEventListener('keyup', function (e) {
-    let query = e.target.value;
+const processTerms = (termsArr) => {
+  let allCards = [];
+  let i = 0;
+  while (i < termsArr.length) {
+    let prev = termsArr[i - 1];
+    let current = termsArr[i];
+    let next = termsArr[i + 1];
 
-    flashcards.forEach(card => {
-      card.parentNode.classList.add('hide');
-    });
+    if (current.tagName == 'DIV') {
+      let [card, flag] = processCodeTerms(prev, current, next);
+      allCards.push(card);
+      flag ? i += 2 : i++;
+    } else {
+      let card = processTextTerms(current);
+      if (card) allCards.push(card);
+      i++;
+    }
+  }
+  return allCards;
+}
 
-    flashcards.filter(card => {
-      let front = card.firstChild.textContent.toLowerCase();
-      let back = card.lastChild.textContent.toLowerCase();
+/**
+ * Return term object from <p> containing only text.
+ * 
+ * @param {HTMLElement} terms 
+ */
+const processTextTerms = (text) => {
+  let terms = text.textContent.split('\n');
+  if (terms.length < 2) return;
 
-      if (front.includes(query) || back.includes(query)) {
-        card.parentNode.classList.remove('hide');
-      }
-    });
-  });
+  let frontTerm = terms[0].substr(terms[0].indexOf('.') + 1);
+  let backTerm = terms[1].substr(terms[1].indexOf('.') + 1);
+
+  if (!frontTerm[1] || !backTerm[1]) return;
+
+  return {
+    front: frontTerm,
+    back: backTerm
+  };
+}
+
+/**
+ * Return array containing term object from <div> and a flag
+ * to signify if next term should be skipped.
+ * 
+ * @param {HTMLElement} terms 
+ */
+const processCodeTerms = (prevTerm, term, nextTerm) => {
+
+  const processText = (text) => {
+    let term = text.textContent.split('\n');
+    term = term[0].substr(term[0].indexOf('.') + 1);
+    return term.trim();
+  }
+
+  let frontTerm;
+  let backTerm;
+  let flag;
+
+  // If length of previous term less than 4, <div> is front card
+  if (prevTerm.textContent.length < 4) {
+    frontTerm = term;
+    backTerm = processText(nextTerm);
+    flag = true;
+  } else {  // Otherwise <div> is back card
+    frontTerm = processText(prevTerm);
+    backTerm = term;
+    flag = false;
+  }
+  return [{
+    front: frontTerm,
+    back: backTerm
+  }, flag];
 }
 
 /**
@@ -90,103 +146,49 @@ const flipCard = (cards) => {
 }
 
 /**
- * Return term object from <p> containing only text.
+ * Filter out flashcards from search query.
  * 
- * @param {HTMLElement} terms 
+ * @param {HTMLElement} flashcards
+ * @param {HTMLElement} searchbar 
  */
-const processTextTerms = (text) => {
-  let terms = text.textContent.split('\n');
-  if (terms.length < 2) return;
+const filterCards = (flashcards, searchbar) => {
+  searchbar.addEventListener('keyup', function (e) {
+    let query = e.target.value;
 
-  let frontTerm = terms[0].substr(terms[0].indexOf('.') + 1);
-  let backTerm = terms[1].substr(terms[1].indexOf('.') + 1);
+    flashcards.forEach(card => {
+      card.parentNode.classList.add('hide');
+    });
 
-  if (!frontTerm[1] || !backTerm[1]) return;
+    flashcards.filter(card => {
+      let front = card.firstChild.textContent.toLowerCase();
+      let back = card.lastChild.textContent.toLowerCase();
 
-  return {
-    front: frontTerm,
-    back: backTerm
-  };
+      if (front.includes(query) || back.includes(query)) {
+        card.parentNode.classList.remove('hide');
+      }
+    });
+  });
 }
 
-/**
- * Return array containing term object from <div> and a flag
- * to signify if next term should be skipped.
- * 
- * @param {HTMLElement} terms 
- */
-const processCodeTerms = (prevTerm, term, nextTerm) => {
-
-  const processText = (text) => {
-    let term = text.textContent.split('\n');
-    term = term[0].substr(term[0].indexOf('.') + 1);
-    return term.trim();
-  }
-
-  let frontTerm;
-  let backTerm;
-  let flag;
-
-  // If length of previous term less than 4, <div> is front card
-  if (prevTerm.textContent.length < 4) {
-    frontTerm = term;
-    backTerm = processText(nextTerm);
-    flag = true;
-  } else {  // Otherwise <div> is back card
-    frontTerm = processText(prevTerm);
-    backTerm = term;
-    flag = false;
-  }
-  return [{
-    front: frontTerm,
-    back: backTerm
-  }, flag];
-}
-
-/**
- * Process and place terms into cards.
- * 
- * @param {array} termsArr
- * @return {array} allCards
- */
-const processTerms = (termsArr) => {
-  let allCards = [];
-  let i = 0;
-  while (i < termsArr.length) {
-    let prev = termsArr[i - 1];
-    let current = termsArr[i];
-    let next = termsArr[i + 1];
-
-    if (current.tagName == 'DIV') {
-      let [card, flag] = processCodeTerms(prev, current, next);
-      allCards.push(card);
-      flag ? i += 2 : i++;
-    } else {
-      let card = processTextTerms(current);
-      if (card) allCards.push(card);
-      i++;
-    }
-  }
-  return allCards;
-}
-
-let container = document.querySelector('.cards-container');
-let terms = Array.from(container.children);
-let allCards = processTerms(terms);
-
-// Generate flashcards from terms
-makeCards(container, allCards);
-
-// Hide all <p> in <main>
-terms.forEach((element) => {
-  if (element.tagName == 'P') element.classList.add('hide');
-});
-
-// Make cards flippable
-let flashcards = document.querySelectorAll('.card');
-flipCard(flashcards);
-
-// Make cards searchable
-flashcards = Array.from(flashcards);
-let searchCards = document.querySelector('#search-cards');
-filterCards(flashcards, searchCards);
+(function() {
+  let container = document.querySelector('.cards-container');
+  let terms = Array.from(container.children);
+  let allCards = processTerms(terms);
+  
+  // Generate flashcards from terms
+  makeCards(container, allCards);
+  
+  // Hide all <p> in <main>
+  terms.forEach((element) => {
+    if (element.tagName == 'P') element.classList.add('hide');
+  });
+  
+  // Make cards flippable
+  let flashcards = document.querySelectorAll('.card');
+  flipCard(flashcards);
+  
+  // Make cards searchable
+  flashcards = Array.from(flashcards);
+  let searchCards = document.querySelector('#search-cards');
+  filterCards(flashcards, searchCards);
+})()

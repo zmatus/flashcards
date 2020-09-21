@@ -10,3 +10,9 @@ include: ["_decks"]
 collections:
   decks:
     output: true
+
+defaults:
+  - scope:
+      path: "_decks"
+    values:
+      layout: deck

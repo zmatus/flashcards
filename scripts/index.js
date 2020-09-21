@@ -23,8 +23,8 @@ const filterDecks = (deckLinks, searchbar) => {
 }
 
 (function() {
-  let decks = Array.from(document.querySelectorAll('.deck'));
-  let searchDecks = document.querySelector('#search-decks');
+  const decks = Array.from(document.querySelectorAll('.deck'));
+  const searchDecks = document.querySelector('#search-decks');
 
   filterDecks(decks, searchDecks);
 })()

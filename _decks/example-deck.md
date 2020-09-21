@@ -1,5 +1,4 @@
 ---
-layout: deck
 title: Example Deck
 ---
 

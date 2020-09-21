@@ -26,23 +26,22 @@ baseurl: /project-name
 
 To create a new deck, create a new markdown file in the `_decks` directory. For example, `new-deck.md`.
 
-At the top of each markdown file, always include this:
+At the top of each markdown file, always include the title of your deck:
 
 ```
 ---
-layout: deck
 title: New Deck
 ---
 ```
 
-This makes sure that the text inside the file will be used to create flashcards. For each term, use this format:
+For each flashcard, follow this format:
 
 ```
-1a. Term
-1b. Explanation.
+1a. Front term
+1b. Back explanation.
 
 2a. Term
-2b. Longer explation. With additional details.
+2b. Longer explanation. With additional details.
 ```
 
 To add code to a card, add triple backticks before the code block:
