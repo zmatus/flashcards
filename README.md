@@ -4,15 +4,25 @@ Converts terms written in markdown to flashcards using Jekyll and Github Pages.
 
 Demo: [Example Deck](https://raisingexceptions.com/jekyll-flashcards/)
 
+## Contents
+- [About](#about)
+- [Project URL](#project-url)
+- [Quickstart](#quick-start)
+- [Run Locally](#run-locally)
+
 ## About
 
 This project makes use of Github Pages to automatically generate flashcards from markdown files. The files are hosted for free on Github and changes made to the project will be updated by Github automatically.
 
 ## Project URL
 
-To change the 
+To change the URL of the project, go to `_config.yml` and change `baseurl` to your project name:
 
-## Quick Start
+```
+baseurl: /project-name
+```
+
+## Quickstart
 
 To create a new deck, create a new markdown file in the `_decks` directory. For example, `new-deck.md`.
 
@@ -49,3 +59,7 @@ while (n < 3) {
 }
 ```
 ````
+
+## Run Locally
+
+To run the project locally, follow the instructions on [Jekyll Quickstart](https://jekyllrb.com/docs/).
