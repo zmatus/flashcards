@@ -1,3 +1,5 @@
+baseurl: /jekyll-flashcards
+
 markdown: kramdown
 kramdown:
   syntax_highlighter: rouge

@@ -8,6 +8,10 @@ Demo: [Example Deck](https://raisingexceptions.com/jekyll-flashcards/)
 
 This project makes use of Github Pages to automatically generate flashcards from markdown files. The files are hosted for free on Github and changes made to the project will be updated by Github automatically.
 
+## Project URL
+
+To change the 
+
 ## Quick Start
 
 To create a new deck, create a new markdown file in the `_decks` directory. For example, `new-deck.md`.
