@@ -2,6 +2,8 @@
 
 Converts terms written in markdown to flashcards using Jekyll and Github Pages.
 
+Demo: [Example Deck](https://raisingexceptions.com/jekyll-flashcards/)
+
 ## About
 
 This project makes use of Github Pages to automatically generate flashcards from markdown files. The files are hosted for free on Github and changes made to the project will be updated by Github automatically.
