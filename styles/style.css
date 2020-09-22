@@ -78,25 +78,25 @@ Decks container
 }
 
 /*
-============
-Deck control
-============
+===========
+Nav control
+===========
 */
-.deck-control {
+.control {
   display: flex;
   margin: 0 auto;
   padding-top: 0.5em;
 }
-.deck-control button {
+.control button {
   color: white;
-  width: 150px;
-  height: 35px;
+  width: 175px;
+  height: 40px;
   font-size: 22px;
   font-weight: 500;
   background: #769fcd;
   margin: 0 10px;
 }
-.deck-control button:hover {
+.control button:hover {
   transform: scale(1.05);
 }
 

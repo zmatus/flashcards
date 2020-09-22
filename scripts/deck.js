@@ -1,8 +1,8 @@
 /**
  * Process and place terms into cards.
  * 
- * @param {array} termsArr
- * @return {array} allCards
+ * @param {Array} termsArr
+ * @return {Array} allCards
  */
 const processTerms = (termsArr) => {
   let allCards = [];
@@ -40,8 +40,8 @@ const processTextTerms = (text) => {
   if (!frontTerm[1] || !backTerm[1]) return;
 
   return {
-    front: frontTerm,
-    back: backTerm
+    front: frontTerm.trim(),
+    back: backTerm.trim()
   };
 }
 
@@ -133,6 +133,24 @@ const makeCards = (cardContainer, termsArr) => {
 }
 
 /**
+ * Generate flashcards from children of cards container.
+ * 
+ * @param {HTMLElement} cardsContainer 
+ */
+const generateCards = (container) => {
+  let terms = Array.from(container.children);
+  let allCards = processTerms(terms);
+  
+  // Generate flashcards from terms
+  makeCards(container, allCards);
+  
+  // Hide non-card elements
+  terms.forEach((element) => {
+    if (element.tagName == 'P') element.classList.add('hide');
+  });
+}
+
+/**
  * Add event listener to flip card on click.
  * 
  * @param {HTMLElement} cards 
@@ -170,25 +188,62 @@ const filterCards = (flashcards, searchbar) => {
   });
 }
 
-(function() {
-  let container = document.querySelector('.cards-container');
-  let terms = Array.from(container.children);
-  let allCards = processTerms(terms);
-  
-  // Generate flashcards from terms
-  makeCards(container, allCards);
-  
-  // Hide all <p> in <main>
-  terms.forEach((element) => {
-    if (element.tagName == 'P') element.classList.add('hide');
-  });
-  
+/**
+ * Add flip and search functionalities to flashcards.
+ * 
+ * @param {HTMLElement} cards 
+ */
+const addCardFunc = (cards) => {
   // Make cards flippable
-  let flashcards = document.querySelectorAll('.card');
-  flipCard(flashcards);
+  flipCard(cards);
   
   // Make cards searchable
-  flashcards = Array.from(flashcards);
-  let searchCards = document.querySelector('#search-cards');
-  filterCards(flashcards, searchCards);
+  cards = Array.from(cards);
+  let search = document.querySelector('#search-cards');
+  filterCards(cards, search);
+}
+
+/**
+ * Convert array of flashcards <div> to object.
+ * 
+ * @param {Array.<HTMLElement>} flashcards 
+ */
+const cardsToObj = (flashcards) => {
+  let obj = {};
+
+  flashcards.forEach((card) => {
+    let front = card.firstChild.innerHTML;
+    let back = card.lastChild.innerHTML;
+
+    obj[front] = back;
+  });
+  return obj;
+}
+
+/**
+ * Add title and cards object to local storage
+ * on button click. Clear storage if not empty.
+ * 
+ * @param {HTMLElement} test
+ * @param {Object} cards 
+ */
+const updateStorage = (test, cards) => {
+  if (localStorage.length !== 0) localStorage.clear();
+
+  test.addEventListener('click', () => {
+    localStorage.setItem("title", document.title);
+    localStorage.setItem("cards", JSON.stringify(cards));
+  });
+}
+
+(function() {
+  let cardsContainer = document.querySelector('.cards-container');
+  generateCards(cardsContainer);
+
+  let flashcards = document.querySelectorAll('.card');
+  addCardFunc(flashcards);
+
+  let testBtn = document.querySelector('#test');
+  let cardsObj = cardsToObj(flashcards);
+  updateStorage(testBtn, cardsObj);
 })()
