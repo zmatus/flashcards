@@ -243,7 +243,7 @@ const updateStorage = (test, cards) => {
   let flashcards = document.querySelectorAll('.card');
   addCardFunc(flashcards);
 
-  let testBtn = document.querySelector('#test');
+  let testBtn = document.querySelector('#test-btn');
   let cardsObj = cardsToObj(flashcards);
   updateStorage(testBtn, cardsObj);
 })()
