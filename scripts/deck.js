@@ -157,7 +157,7 @@ const generateCards = (container) => {
  */
 const flipCard = (cards) => {
   cards.forEach(card => {
-    card.addEventListener('click', function () {
+    card.addEventListener('click', () => {
       card.classList.toggle('flipped');
     });
   });
@@ -170,7 +170,7 @@ const flipCard = (cards) => {
  * @param {HTMLElement} searchbar 
  */
 const filterCards = (flashcards, searchbar) => {
-  searchbar.addEventListener('keyup', function (e) {
+  searchbar.addEventListener('keyup', (e) => {
     let query = e.target.value;
 
     flashcards.forEach(card => {
@@ -246,4 +246,6 @@ const updateStorage = (test, cards) => {
   let testBtn = document.querySelector('#test-btn');
   let cardsObj = cardsToObj(flashcards);
   updateStorage(testBtn, cardsObj);
+
+  console.log(localStorage);
 })()

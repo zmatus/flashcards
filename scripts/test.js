@@ -13,39 +13,106 @@ const storageSize = () => {
 }
 
 /**
- * Set test page title and <h1>.
+ * Clear storage and go back to previous page.
  * 
- * @param {string} title 
+ * @param {HTMLElement} btn 
  */
-const setTitle = (title) => {
-  let header = document.querySelector('h1');
-  header.textContent = title;
-  document.title = title;
-}
-
 const prevPage = (btn) => {
   btn.addEventListener('click', () => {
     localStorage.clear();
     history.back();
-  })
+  });
+}
+
+/**
+ * Set page title and parse JSON back to object.
+ */
+const loadStorage = () => {
+  let title = 'Test: ' + localStorage.getItem('title');
+  let header = document.querySelector('h1');
+
+  header.textContent = title;
+  document.title = title;
+
+  return JSON.parse(localStorage.getItem('cards'));
+}
+
+/**
+ * Hide nav when test starts.
+ */
+const hideNav = () => {
+  let nav = document.querySelector('.control');
+  nav.classList.add('hide');
+}
+
+/**
+ * Clear container and show <nav> when test ends.
+ * 
+ * @param {HTMLElement} container 
+ */
+const clearContainer = (container) => {
+
+}
+
+/**
+ * Create test control buttons for simple test.
+ * 
+ * @param {HTMLElement} container 
+ */
+const makeSimpleControl = (container) => {
+  let control = document.createElement('nav');
+  control.classList.add('simple-control');
+
+  let end = document.createElement('button');
+  end.innerHTML = '&larr; End Test';
+  end.classList.add('end-test');
+  control.appendChild(end);
+
+  let answer = document.createElement('button');
+  answer.innerHTML = '&#9873; Answer'
+  answer.classList.add('answer');
+  control.appendChild(answer);
+
+  let correct = document.createElement('button');
+  correct.innerHTML = '&#9745; Correct';
+  correct.classList.add('correct');
+  control.appendChild(correct);
+
+  let incorrect = document.createElement('button');
+  incorrect.innerHTML = '&#9746; Incorrect';
+  incorrect.classList.add('incorrect');
+  control.appendChild(incorrect);
+  
+  container.appendChild(control);
+}
+
+/**
+ * Generate questions
+ * 
+ * @param {Object} cards 
+ */
+const generateSimpleTest = (container, cards) => {
+  console.log(cards);
+  makeSimpleControl(container);
 }
 
 (function() {
   console.log(localStorage);
   storageSize();
 
-  // Set test page title and <h1>
-  let pageTitle = 'Test: ' + localStorage.getItem('title');
-  setTitle(pageTitle);
-
-  // Parse JSON back to object
-  let cardsObj = JSON.parse(localStorage.getItem('cards'));
-  console.log(cardsObj);
+  let testContainer = document.querySelector('.test-container');
 
   // Go back to previous page
   let finish = document.querySelector('#finish');
-  finish.addEventListener('click', () => {
-    localStorage.clear();
-    history.back();
+  prevPage(finish);
+
+  // Load values from storage
+  let cardsObj = loadStorage();
+
+  // Start simple test
+  let simple = document.querySelector('#simple');
+  simple.addEventListener('click', () => {
+    hideNav();
+    generateSimpleTest(testContainer, cardsObj);
   });
 })()
