@@ -72,6 +72,13 @@ Nav control
   border: 1px solid black;
   background: #07689f;
 }
+#test-simple {
+  margin-left: 4em;
+  background: #68b0ab;
+}
+#test-simple:hover {
+  background: #006a71;
+}
 
 /*
 ===============
@@ -189,9 +196,9 @@ Cards container
 }
 
 /*
-============
-Test Control
-============
+===================
+Simple Test Control
+===================
 */
 .simple-control {
   width: 100%;
@@ -202,7 +209,7 @@ Test Control
 }
 .simple-control button {
   min-width: 100px;
-  height: 35px;
+  height: 40px;
   color: white;
   font-size: 20px;
   font-weight: 700;
@@ -272,7 +279,6 @@ Simple Test
   grid-gap: 1em;
 }
 .simple-front {
-  height: 90%;
   overflow: auto;
   grid-column: 1;
   display: grid;
@@ -282,7 +288,6 @@ Simple Test
   background: #d6e6f2;
 }
 .simple-back {
-  height: 90%;
   overflow: auto;
   grid-column: 2;
   display: grid;

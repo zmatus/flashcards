@@ -118,19 +118,17 @@ const generateSimpleTest = (container, cards) => {
 }
 
 (function() {
-  console.log(localStorage);
-
   let testContainer = document.querySelector('.test-container');
 
   // Go back to previous page
-  let finish = document.querySelector('#finish');
+  let finish = document.querySelector('#test-finish');
   prevPage(finish);
 
   // Load values from storage
   let cardsObj = loadStorage();
 
   // Start simple test
-  let simple = document.querySelector('#simple');
+  let simple = document.querySelector('#test-simple');
   simple.addEventListener('click', () => {
     toggleNav();
     generateSimpleTest(testContainer, cardsObj);
