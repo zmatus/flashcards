@@ -1,17 +1,3 @@
-const storageSize = () => {
-  let _lsTotal = 0,
-    _xLen, _x;
-  for (_x in localStorage) {
-      if (!localStorage.hasOwnProperty(_x)) {
-          continue;
-      }
-      _xLen = ((localStorage[_x].length + _x.length) * 2);
-      _lsTotal += _xLen;
-      console.log("> " + _x.substr(0, 50) + " = " + (_xLen / 1024).toFixed(2) + " KB")
-  };
-  console.log(">>> Total Size = " + (_lsTotal / 1024).toFixed(2) + " KB");
-}
-
 /**
  * Clear storage and go back to previous page.
  * 
@@ -40,18 +26,23 @@ const loadStorage = () => {
 /**
  * Hide nav when test starts.
  */
-const hideNav = () => {
+const toggleNav = () => {
   let nav = document.querySelector('.control');
-  nav.classList.add('hide');
+  nav.classList.toggle('hide');
 }
 
 /**
- * Clear container and show <nav> when test ends.
+ * Clear container and show <nav>
+ * when end test button is clicked.
  * 
+ * @param {HTMLElement} end
  * @param {HTMLElement} container 
  */
 const clearContainer = (container) => {
-
+  while (container.firstChild) {
+    container.removeChild(container.lastChild);
+  }
+  toggleNav();
 }
 
 /**
@@ -86,6 +77,27 @@ const makeSimpleControl = (container) => {
   container.appendChild(control);
 }
 
+const makeSimpleBox = (container) => {
+  let front = document.createElement('div');
+  let frontHeader = document.createElement('h2');
+  frontHeader.textContent = 'Front';
+  front.classList.add('simple-front');
+  front.appendChild(frontHeader);
+  
+  let back = document.createElement('div');
+  let backHeader = document.createElement('h2');
+  backHeader.textContent = 'Back';
+  back.classList.add('simple-back');
+  back.appendChild(backHeader);
+  
+  let box = document.createElement('div');
+  box.classList.add('simple-test');
+  box.appendChild(front);
+  box.appendChild(back);
+  
+  container.appendChild(box);
+}
+
 /**
  * Generate questions
  * 
@@ -93,12 +105,20 @@ const makeSimpleControl = (container) => {
  */
 const generateSimpleTest = (container, cards) => {
   console.log(cards);
+
   makeSimpleControl(container);
+
+  // End test and go back to tests selection
+  let endTest = document.querySelector('.end-test');
+  endTest.addEventListener('click', () => {
+    clearContainer(container);
+  });
+
+  makeSimpleBox(container);
 }
 
 (function() {
   console.log(localStorage);
-  storageSize();
 
   let testContainer = document.querySelector('.test-container');
 
@@ -112,7 +132,7 @@ const generateSimpleTest = (container, cards) => {
   // Start simple test
   let simple = document.querySelector('#simple');
   simple.addEventListener('click', () => {
-    hideNav();
+    toggleNav();
     generateSimpleTest(testContainer, cardsObj);
   });
 })()

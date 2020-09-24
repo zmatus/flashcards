@@ -198,7 +198,7 @@ Test Control
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   justify-content: center;
-  margin: 0.5em auto;
+  margin-top: 0.5em;
 }
 .simple-control button {
   min-width: 100px;
@@ -216,6 +216,7 @@ Test Control
 .end-test {
   grid-column: 4;
   background: #769fcd;
+  justify-self: end;
 }
 .end-test:hover {
   background: #07689f;
@@ -252,8 +253,41 @@ Test Container
 */
 .test-container {
   width: 100%;
-  height: 100vh;
   display: grid;
   grid-template-rows: 1fr 9fr;
-  border: 1px solid black;
+  justify-content: center;
+}
+
+/*
+===========
+Simple Test
+===========
+*/
+.simple-test {
+  grid-row: 2;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 1em auto;
+  grid-gap: 1em;
+}
+.simple-front {
+  height: 90%;
+  overflow: auto;
+  grid-column: 1;
+  display: grid;
+  grid-template-rows: 1fr 8fr;
+  justify-content: center;
+  border-radius: 10px;
+  background: #d6e6f2;
+}
+.simple-back {
+  height: 90%;
+  overflow: auto;
+  grid-column: 2;
+  display: grid;
+  grid-template-rows: 1fr 8fr;
+  justify-content: center;
+  border-radius: 10px;
+  background: #b9d7ea;
 }
