@@ -4,10 +4,20 @@
  * @param {HTMLElement} btn 
  */
 const prevPage = (btn) => {
-  btn.addEventListener('click', () => {
+
+  function clearBack() {
     localStorage.clear();
     history.back();
-  });
+  }
+
+  btn.addEventListener('click', clearBack);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Backspace') clearBack();
+  })
+}
+
+const loadTest = (terms) => {
+
 }
 
 /**
@@ -25,12 +35,12 @@ const loadStorage = () => {
 
 (function() {
   // Go back to previous page
-  let finish = document.querySelector('#end-test');
-  prevPage(finish);
+  let end = document.querySelector('#end');
+  prevPage(end);
   
   // Load values from storage
   let cardsObj = loadStorage();
   console.log(cardsObj);
 
-  let testContainer = document.querySelector('.test-container');
+  loadTest(cardsObj);
 })()

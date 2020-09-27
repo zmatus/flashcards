@@ -7,15 +7,23 @@ body {
   background: #ecf4f3;
   font-family: Verdana, sans-serif;
 }
+h1, h2 {
+  text-align: center;
+}
 h1 {
   font-size: 2.2em;
-  text-align: center;
+}
+h2 {
+  font-size: 1.7em;
 }
 button {
   border-radius: 5px;
 }
 hr {
   width: 60%;
+}
+span {
+  font-size: 18px;
 }
 .hide {
   display: none !important;
@@ -209,7 +217,7 @@ Test Control
 }
 .test-control button {
   min-width: 100px;
-  height: 40px;
+  min-height: 55px;
   color: white;
   font-size: 20px;
   font-weight: 700;
@@ -222,20 +230,19 @@ Test Control
   border: 1px solid black;
   background: #07689f;
 }
-.home {
+#home {
   grid-column: 1;
 }
-#end-test {
+#end {
   grid-column: 2;
   background: #8d93ab;
 }
-#end-test:hover {
+#end:hover {
   background: #393b44;
 }
 #answer {
   grid-column: 4;
   background: #c3aed6;
-  justify-self: end;
 }
 #answer:hover {
   background: #9d65c9;
@@ -243,7 +250,6 @@ Test Control
 #correct {
   grid-column: 5;
   background: #68b0ab;
-  justify-self: end;
 }
 #correct:hover {
   background: #00CD00	;
@@ -251,7 +257,6 @@ Test Control
 #incorrect {
   grid-column: 6;
   background: #ff414d;
-  justify-self: start;
 }
 #incorrect:hover {
   background: #FC1501;
@@ -266,26 +271,21 @@ Test Container
   width: 80%;
   height: 70vh;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   grid-gap: 1em;
   justify-content: center;
   margin: 2em auto 1em auto;
 }
-.test-front {
+.test-container div {
   overflow: auto;
-  grid-column: 1;
-  display: grid;
-  grid-template-rows: 1fr 8fr;
-  justify-content: center;
   border-radius: 10px;
+  text-align: center;
+  padding-top: 2em;
+  font-size: 22px;
+}
+.test-front {
   background: #d6e6f2;
 }
 .test-back {
-  overflow: auto;
-  grid-column: 2;
-  display: grid;
-  grid-template-rows: 1fr 8fr;
-  justify-content: center;
-  border-radius: 10px;
   background: #b9d7ea;
 }
