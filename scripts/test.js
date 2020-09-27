@@ -4,20 +4,18 @@
  * @param {HTMLElement} btn 
  */
 const prevPage = (btn) => {
-
-  function clearBack() {
+  btn.addEventListener('click', () => {
     localStorage.clear();
     history.back();
-  }
-
-  btn.addEventListener('click', clearBack);
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Backspace') clearBack();
-  })
+  });
 }
 
-const loadTest = (terms) => {
+const loadTest = (termsObj) => {
+  let right = 0;
+  let wrong = 0;
+  let total = Object.keys(termsObj);
 
+  console.log(total);
 }
 
 /**

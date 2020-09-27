@@ -212,12 +212,11 @@ Test Control
   width: 60%;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  justify-content: center;
   margin: 1em auto;
 }
 .test-control button {
   min-width: 100px;
-  min-height: 55px;
+  height: 40px;
   color: white;
   font-size: 20px;
   font-weight: 700;
@@ -241,6 +240,7 @@ Test Control
   background: #393b44;
 }
 #answer {
+  min-height: 50px;
   grid-column: 4;
   background: #c3aed6;
 }
@@ -248,6 +248,7 @@ Test Control
   background: #9d65c9;
 }
 #correct {
+  min-height: 50px;
   grid-column: 5;
   background: #68b0ab;
 }
@@ -255,6 +256,7 @@ Test Control
   background: #00CD00	;
 }
 #incorrect {
+  min-height: 50px;
   grid-column: 6;
   background: #ff414d;
 }
