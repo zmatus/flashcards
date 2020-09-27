@@ -40,7 +40,10 @@ const showAnswer = term => {
 
     answerBtn.addEventListener('click', () => {
       back.innerHTML = term;
-    })
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'w') back.innerHTML = term;
+    });
   });
 }
 
