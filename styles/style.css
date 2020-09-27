@@ -199,7 +199,7 @@ Cards container
 }
 .highlight {
   font-family: 'Fira Code', monospace;
-  font-size: 13px;
+  font-size: 14px;
   overflow: auto;
 }
 
@@ -281,9 +281,14 @@ Test Container
 .test-container div {
   overflow: auto;
   border-radius: 10px;
-  text-align: center;
-  padding-top: 2em;
   font-size: 22px;
+  text-align: center;
+  padding-top: 1em;
+}
+.test-container div .highlight {
+  text-align: left;
+  padding-top: 0;
+  padding-left: 0.5em;
 }
 .test-front {
   background: #d6e6f2;

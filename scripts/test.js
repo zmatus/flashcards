@@ -3,19 +3,72 @@
  * 
  * @param {HTMLElement} btn 
  */
-const prevPage = (btn) => {
+const prevPage = btn => {
   btn.addEventListener('click', () => {
     localStorage.clear();
     history.back();
   });
 }
 
-const loadTest = (termsObj) => {
+/**
+ * Shuffle array in place.
+ * 
+ * @param {Array} terms 
+ */
+const shuffle = terms => {
+  let i;
+  let j;
+  let temp;
+
+  for (i = terms.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = terms[i];
+    terms[i] = terms[j];
+    terms[j] = temp;
+  }
+  return terms;
+}
+
+/**
+ * 
+ * @param {string} term 
+ */
+const showAnswer = term => {
+  return new Promise(() => {
+    let back = document.querySelector('.test-back');
+    let answerBtn = document.querySelector('#answer');
+
+    answerBtn.addEventListener('click', () => {
+      back.innerHTML = term;
+    })
+  });
+}
+
+/**
+ * Generate test with shuffled array terms.
+ * 
+ * @param {Object} termsObj 
+ */
+const loadTest = async (termsObj) => {
+  let terms = Object.keys(termsObj);
+  terms = shuffle(terms);
+
+  console.log(terms);
+
   let right = 0;
   let wrong = 0;
-  let total = Object.keys(termsObj);
+  let front = document.querySelector('.test-front');
 
-  console.log(total);
+  for (let i = 0; i < terms.length; i++) {
+    let frontTerm = terms[i];
+    let backTerm = termsObj[terms[i]];
+
+    console.log(frontTerm);
+
+    front.innerHTML = frontTerm;
+
+    await showAnswer(backTerm);
+  }
 }
 
 /**
@@ -38,7 +91,6 @@ const loadStorage = () => {
   
   // Load values from storage
   let cardsObj = loadStorage();
-  console.log(cardsObj);
 
   loadTest(cardsObj);
 })()
