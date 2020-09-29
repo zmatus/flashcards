@@ -248,4 +248,4 @@ const updateStorage = (test, cards) => {
   updateStorage(testBtn, cardsObj);
 
   console.log(localStorage);
-})()
+})();

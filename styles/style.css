@@ -209,14 +209,14 @@ Test Control
 ============
 */
 .test-control {
-  width: 60%;
+  width: 65%;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   margin: 1em auto;
 }
 .test-control button {
   min-width: 100px;
-  height: 40px;
+  min-height: 40px;
   color: white;
   font-size: 20px;
   font-weight: 700;
@@ -236,28 +236,32 @@ Test Control
   grid-column: 2;
   background: #8d93ab;
 }
+#new {
+  grid-column:3;
+  background: #68b0ab;
+}
+#new:hover {
+  background: #006a71;
+}
 #end:hover {
   background: #393b44;
 }
 #answer {
-  min-height: 50px;
-  grid-column: 4;
+  grid-column: 5;
   background: #c3aed6;
 }
 #answer:hover {
   background: #9d65c9;
 }
 #correct {
-  min-height: 50px;
-  grid-column: 5;
+  grid-column: 6;
   background: #68b0ab;
 }
 #correct:hover {
   background: #00CD00	;
 }
 #incorrect {
-  min-height: 50px;
-  grid-column: 6;
+  grid-column: 7;
   background: #ff414d;
 }
 #incorrect:hover {
@@ -283,16 +287,16 @@ Test Container
   border-radius: 10px;
   font-size: 22px;
   text-align: center;
-  padding-top: 1em;
+  padding-top: 2em;
 }
 .test-container div .highlight {
   text-align: left;
-  padding-top: 0;
+  margin-top: -1em;
   padding-left: 0.5em;
 }
-.test-front {
+.test-question {
   background: #d6e6f2;
 }
-.test-back {
+.test-answer {
   background: #b9d7ea;
 }

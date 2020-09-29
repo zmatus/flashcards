@@ -27,4 +27,4 @@ const filterDecks = (deckLinks, searchbar) => {
   let searchDecks = document.querySelector('#search-decks');
 
   filterDecks(decks, searchDecks);
-})()
+})();
