@@ -2,10 +2,10 @@
 title: Example Deck
 ---
 
-1a. Some term here
+1a. Some term here.
 1b. An explanation here.
 
-2a. Another term
+2a. Another term. With long details.
 2b. Another explanation. Along with some supporting information.
 
 3a. JavaScript for loop

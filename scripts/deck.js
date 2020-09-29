@@ -246,6 +246,4 @@ const updateStorage = (test, cards) => {
   let testBtn = document.querySelector('#test-btn');
   let cardsObj = cardsToObj(flashcards);
   updateStorage(testBtn, cardsObj);
-
-  console.log(localStorage);
 })();
