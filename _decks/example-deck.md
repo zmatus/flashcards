@@ -10,7 +10,7 @@ title: Example Deck
 
 3a. JavaScript for loop
 3b.
-```
+```js
 let str = '';
 
 for (let i = 0; i < 9; i++) {
@@ -20,7 +20,7 @@ for (let i = 0; i < 9; i++) {
 
 4a. C switch statement
 4b. 
-```
+```c
 #include <stdio.h>
 
 int main() {
@@ -43,7 +43,7 @@ int main() {
 
 5a. Python list comprehension
 5b.
-```
+```py
 squares = []
 
 for x in range(10):

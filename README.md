@@ -44,12 +44,12 @@ For each flashcard, follow this format:
 2b. Longer explanation. With additional details.
 ```
 
-To add code to a card, add triple backticks before the code block:
+To add code to a card, add triple backticks with a language identifier (js, py, etc.) before the code block:
 
 ````
 3a. JavaScript while loop
 3b.
-```
+```js
 let n = 0;
 
 while (n < 3) {
