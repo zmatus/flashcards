@@ -1,5 +1,5 @@
 ---
-title: Example Deck
+title: Demo
 ---
 
 1a. Some term here.
