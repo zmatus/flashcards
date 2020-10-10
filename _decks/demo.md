@@ -49,6 +49,18 @@ squares = []
 for x in range(10):
   squares.append(x**2)
 
-# Above also equals to:
+# List comprehension is same as above
 squares = [x**2 for x in range(10)]
 ```
+ 
+6a. Point-slope formula
+6b.
+$$
+y -y_{1} = m(x - x_{1})
+$$
+
+7a. Summation notation
+7b.
+$$
+\sum_{i=1}^{n}i=\frac{n(n+1)}{2}
+$$

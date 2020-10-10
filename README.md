@@ -44,7 +44,7 @@ For each flashcard, follow this format:
 2b. Longer explanation. With additional details.
 ```
 
-To add code to a card, add triple backticks with a language identifier (js, py, etc.) before the code block:
+To add code to a card, wrap the code in triple backticks ``` with a language identifier (js, py, c):
 
 ````
 3a. JavaScript while loop
@@ -58,6 +58,18 @@ while (n < 3) {
 }
 ```
 ````
+
+To add math equations, wrap the equation with double dollar signs `$$`:
+
+```
+$$
+\sum_{i=1}^{n}i=\frac{n(n+1)}{2}
+$$
+```
+
+$$
+\sum_{i=1}^{n}i=\frac{n(n+1)}{2}
+$$
 
 ## Run Locally
 

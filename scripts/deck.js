@@ -31,11 +31,32 @@ const processTerms = (termsArr) => {
  * @param {HTMLElement} terms 
  */
 const processTextTerms = (text) => {
-  let terms = text.textContent.split('\n');
-  if (terms.length < 2) return;
 
-  let frontTerm = terms[0].substr(terms[0].indexOf('.') + 1);
-  let backTerm = terms[1].substr(terms[1].indexOf('.') + 1);
+  function getTerm(term) {
+    return term.substr(term.indexOf('.') + 1);
+  }
+
+  let frontTerm;
+  let backTerm;
+  let terms = text.textContent.split('\n');
+  if (terms.length < 2) {
+    return;
+  } else if (terms.length == 2) {   // Regular text term
+    frontTerm = getTerm(terms[0]);
+    backTerm = getTerm(terms[1]);
+  } else if (terms.length > 2) {    // Text term with math equations
+    console.log(terms);
+    if (terms[1].includes('\\')) {
+      frontTerm = terms[1];
+      backTerm = getTerm(terms[2]);
+    } else {
+      frontTerm = getTerm(terms[0]);
+      // backTerm = terms[2];
+      backTerm = terms[2];
+      console.log(backTerm);
+    }
+  }
+
 
   if (!frontTerm[1] || !backTerm[1]) return;
 
