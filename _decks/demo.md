@@ -56,7 +56,7 @@ squares = [x**2 for x in range(10)]
 6a. Point-slope formula
 6b.
 $$
-y -y_{1} = m(x - x_{1})
+y-y_{1}=m(x-x_{1})
 $$
 
 7a. Summation notation

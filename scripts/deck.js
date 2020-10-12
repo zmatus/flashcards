@@ -5,19 +5,29 @@
  * @return {Array} allCards
  */
 const processTerms = (termsArr) => {
+  // Array of term objects
   let allCards = [];
+
+  // Terms in array
+  let prev;
+  let current;
+  let next;
+
+  let card;         // Processed term object
+  let flag;         // Flag for skipping next term
+
   let i = 0;
   while (i < termsArr.length) {
-    let prev = termsArr[i - 1];
-    let current = termsArr[i];
-    let next = termsArr[i + 1];
+    prev = termsArr[i - 1];
+    current = termsArr[i];
+    next = termsArr[i + 1];
 
     if (current.tagName == 'DIV') {
-      let [card, flag] = processCodeTerms(prev, current, next);
+      [card, flag] = processCodeTerms(prev, current, next);
       allCards.push(card);
       flag ? i += 2 : i++;
     } else {
-      let card = processTextTerms(current);
+      card = processTextTerms(current);
       if (card) allCards.push(card);
       i++;
     }
@@ -36,27 +46,30 @@ const processTextTerms = (text) => {
     return term.substr(term.indexOf('.') + 1);
   }
 
+  function getMath(term) {
+    let math = term.substr(2, term.length - 4);
+    return `$$${math}$$`;
+  }
+
+  let terms = text.textContent.split('\n');
+
   let frontTerm;
   let backTerm;
-  let terms = text.textContent.split('\n');
   if (terms.length < 2) {
     return;
   } else if (terms.length == 2) {   // Regular text term
     frontTerm = getTerm(terms[0]);
     backTerm = getTerm(terms[1]);
   } else if (terms.length > 2) {    // Text term with math equations
-    console.log(terms);
     if (terms[1].includes('\\')) {
-      frontTerm = terms[1];
+      frontTerm = getMath(terms[1]);
       backTerm = getTerm(terms[2]);
     } else {
       frontTerm = getTerm(terms[0]);
-      // backTerm = terms[2];
-      backTerm = terms[2];
+      backTerm = getMath(terms[2]);
       console.log(backTerm);
     }
   }
-
 
   if (!frontTerm[1] || !backTerm[1]) return;
 
