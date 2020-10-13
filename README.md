@@ -59,7 +59,7 @@ while (n < 3) {
 ```
 ````
 
-To add math equations, wrap the equation with double dollar signs `$$`:
+To add math equations, use [CodeCogs](https://www.codecogs.com/latex/eqneditor.php) to edit the equation. Then wrap the equation with double dollar signs `$$`:
 
 ```
 $$

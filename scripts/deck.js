@@ -67,7 +67,6 @@ const processTextTerms = (text) => {
     } else {
       frontTerm = getTerm(terms[0]);
       backTerm = getMath(terms[2]);
-      console.log(backTerm);
     }
   }
 
@@ -245,9 +244,11 @@ const addCardFunc = (cards) => {
 const cardsToObj = (flashcards) => {
   let obj = {};
 
+  let front;
+  let back;
   flashcards.forEach((card) => {
-    let front = card.firstChild.innerHTML;
-    let back = card.lastChild.innerHTML;
+    front = card.firstChild.innerHTML;
+    back = card.lastChild.innerHTML;
 
     obj[front] = back;
   });
