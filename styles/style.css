@@ -20,7 +20,20 @@ button {
   border-radius: 5px;
 }
 hr {
-  width: 60%;
+  height: 30px;
+  border-style: solid;
+  border-width: 2px 0 0 0;
+  border-radius: 20px;
+  width: 40%;
+}
+hr:before {
+  display: block;
+  content: "";
+  height: 30px;
+  margin-top: -31px;
+  border-style: solid;
+  border-width: 0 0 2px 0;
+  border-radius: 20px;
 }
 .hide {
   display: none !important;
@@ -290,10 +303,12 @@ Test Container
   padding-top: 1em;
 }
 .test-question {
+  border: 5px solid white;
   padding-top: 2em;
   background: #d6e6f2;
 }
 .test-answer {
+  border: 5px solid white;
   padding-top: 2em;
   background: #b9d7ea;
 }
