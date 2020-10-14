@@ -46,6 +46,8 @@ const processTextTerms = (text) => {
     return term.substr(term.indexOf('.') + 1);
   }
 
+  /* Add $$ to front and back of term
+  turns equation to displayed math */
   function getMath(term) {
     let math = term.substr(2, term.length - 4);
     return `$$${math}$$`;

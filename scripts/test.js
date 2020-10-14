@@ -36,7 +36,14 @@ const shuffle = terms => {
  */
 const showQuestion = term => {
   let question = document.querySelector('.test-question');
+
   question.innerHTML = term;
+  
+  // Typeset dynamically and change padding
+  if (term.includes('$$')) {
+    MathJax.typesetPromise();
+    question.style.paddingTop = '0.5em';
+  } else question.style.paddingTop = '2em';
 }
 
 /**
@@ -45,11 +52,20 @@ const showQuestion = term => {
  * @param {string} term 
  */
 const showAnswer = term => {
+
+  console.log(term);
+
   let answer = document.querySelector('.test-answer');
   let answerBtn = document.querySelector('#answer');
 
   answerBtn.addEventListener('click', () => {
     answer.innerHTML = term;
+
+    // Typeset dynamically and change padding
+    if (term.includes('$$')) {
+      MathJax.typesetPromise();
+      answer.style.paddingTop = '0.5em';
+    } else answer.style.paddingTop = '2em';
   });
 }
 
