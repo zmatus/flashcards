@@ -1,4 +1,8 @@
 /**
+ * @module card
+ */
+
+/**
  * Process and place terms into cards.
  * 
  * @param {Array} termsArr

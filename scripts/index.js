@@ -1,4 +1,8 @@
 /**
+ * @module deck
+ */
+
+/**
  * Filter out deck links from search query.
  * 
  * @param {HTMLElement} deckLinks
