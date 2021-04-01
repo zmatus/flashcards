@@ -9,3 +9,6 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem "jekyll"
 gem "github-pages", group: :jekyll_plugins
 gem "nokogiri", ">= 1.11.0"
+
+# Fix kramdown vulnerability
+gem "kramdown", ">= 2.3.1"
