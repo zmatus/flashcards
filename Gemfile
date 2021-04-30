@@ -8,7 +8,8 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "jekyll"
 gem "github-pages", group: :jekyll_plugins
-gem "nokogiri", ">= 1.11.0"
 
-# Fix kramdown vulnerability
+# Fix kramdown vulnerabilities
 gem "kramdown", ">= 2.3.1"
+gem "nokogiri", ">= 1.11.0"
+gem "rexml", ">= 3.2.5"
