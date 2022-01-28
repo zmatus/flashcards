@@ -1,4 +1,4 @@
-baseurl: /jekyll-flashcards
+baseurl: /flashcards
 
 markdown: kramdown
 kramdown:
