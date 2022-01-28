@@ -1,4 +1,4 @@
-baseurl: /flashcards
+baseurl: https://zmatus.github.io/flashcards
 
 markdown: kramdown
 kramdown:
