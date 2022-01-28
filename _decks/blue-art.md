@@ -3,10 +3,13 @@ title: Blue-Art
 ---
 1 a.Bertie Wooster is a character from which book or series?
 1 b.My Man Jeeves
+
 2 a.Bigger Thomas is a character from which book or series?
 2 b.Native Son
+
 3 a.Binx Bolling is a character from which book or series?
 3 b.The Moviegoer
+
 4 a.Holly Golightly is a character from which book or series?
 4 b.Breakfast at Tiffanys
 5 a.How many book are in the Harry Potter series?
