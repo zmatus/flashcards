@@ -1,7 +1,8 @@
 ---
 title:Blue-Art
 ---
-1a.	BertieWoosterisacharacterfromwhichbookorseries?	1b.	MyManJeeves
+
+1a. BertieWoosterisacharacterfromwhichbookorseries?	1b.	MyManJeeves
 
 2a.	BiggerThomasisacharacterfromwhichbookorseries?	2b.	NativeSon
 
