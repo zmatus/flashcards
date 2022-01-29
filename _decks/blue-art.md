@@ -1,7 +1,6 @@
 ---
-title:Blue-Art
+title: Blue-Art
 ---
-
 1a.	Bertie Wooster is a character from which book or series?	
 1b.	My Man Jeeves
  
